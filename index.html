@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./assets/css/reset.css" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-    />
+    <link rel="stylesheet" href="./assets/css/responsive.css" />
+    <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -15,23 +15,27 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="./assets/js/scrollreveal.js"></script>
     <title>Rami'z Pizza</title>
+    <meta
+      name="description"
+      content="Disfruta de deliciosas pizzas en Ramiz Pizza. Llámanos y nosotros te la envíamos a tu domicilio."
+    />
   </head>
   <body>
+    <!-- ------------- Header --------------- -->
     <header class="header">
       <nav class="navbar">
         <div class="navbar-main">
           <button class="navbar__toggler" id="icon-toggler">
             <span class="navbar__toggler-icon"
-              ><i class="fa-solid fa-bars"></i
+              ><i class="fa-solid fa-bars" id="icon-menu"></i
             ></span>
           </button>
           <div class="navbar__logo">
             <a href="#inicio">
-              <img src="./assets/img/logo.png" alt="Loog" width="70" />
+              <img src="./assets/img/logo.png" alt="Logo" width="70" />
             </a>
-            <!-- Ramiz Pizza -->
           </div>
           <ul class="navbar-nav">
             <li class="navbar-item">
@@ -49,45 +53,52 @@
           </ul>
         </div>
         <div class="navbar-btn">
-          <a href="">Haz tu pedido</a>
+          <a
+            href="https://m.me/111745515342233"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Haz tu pedido</a
+          >
         </div>
       </nav>
     </header>
+    <!-- ------------- Header --------------- -->
+
     <div class="container" id="inicio">
+      <!-- ------------- Carrousel --------------- -->
       <!-- Swiper -->
-      <div class="swiper mySwiper">
+      <section class="swiper mySwiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
+            <img
+              src="./assets/img/pizza-rectangular.webp"
+              alt="Pizza Rectangular"
+            />
+          </div>
+          <div class="swiper-slide">
             <!-- <div class="swiper-custom"> -->
-            <img src="./assets/img/pizza-rectangular.webp" alt="" />
+            <img src="./assets/img/pizza-barra.webp" alt="Pizza barra" />
             <!-- </div> -->
           </div>
           <div class="swiper-slide">
             <!-- <div class="swiper-custom"> -->
-            <img src="./assets/img/pizza-barra.webp" alt="" />
+            <img src="./assets/img/orilla-rellena.webp" alt="Orilla rellena" />
             <!-- </div> -->
           </div>
           <div class="swiper-slide">
             <!-- <div class="swiper-custom"> -->
-            <img src="./assets/img/orilla-rellena.webp" alt="" />
-            <!-- </div> -->
-          </div>
-          <div class="swiper-slide">
-            <!-- <div class="swiper-custom"> -->
-            <img src="./assets/img/servicio.webp" alt="" />
+            <img src="./assets/img/servicio.webp" alt="Servicios" />
             <!-- </div> -->
           </div>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-pagination"></div>
-      </div>
-      <!-- Promociones -->
-      <!-- <div class="promociones">
-        <article class="article"></article>
-      </div> -->
-      <div class="grid-container" id="promociones">
-        <h3 class="title-section">Promociones</h3>
+      </section>
+
+      <!-- ------------- Promociones --------------- -->
+      <section class="grid-container" id="promociones">
+        <h1 class="title-section">Promociones Ramiz Pizza</h1>
         <div
           class="grid-x grid-margin-x small-up-1 medium-up-2 large-up-4 grid-x-wrapper"
         >
@@ -96,7 +107,7 @@
               <div class="product-item-image">
                 <img
                   src="./assets/img/paquete1.png"
-                  alt="Stadium Full Exterior"
+                  alt="Paquete 1"
                   class="img-1"
                 />
                 <div class="product-item-image-hover"></div>
@@ -108,8 +119,9 @@
                 <div class="product-item-title">Paquete 1</div>
                 <div class="button-pill">
                   <a
-                    href="https://m.me/111745515342233?ref=Quiero un paquete"
+                    href="https://m.me/111745515342233"
                     target="_blank"
+                    rel="noopener noreferrer"
                     >¡Pídela ahora!</a
                   >
                 </div>
@@ -122,7 +134,7 @@
               <div class="product-item-image">
                 <img
                   src="./assets/img/paquete2.png"
-                  alt="Stadium Full Exterior"
+                  alt="Paquete 2"
                   class="img-1"
                 />
                 <div class="product-item-image-hover"></div>
@@ -133,15 +145,11 @@
                 </div>
                 <div class="product-item-title">Paquete 2</div>
                 <div class="button-pill">
-                  <!-- <button>¡Pídela Ya!</button> -->
                   <a
                     href="https://m.me/111745515342233?ref=Quiero un paquete"
                     target="_blank"
                     >¡Pídela ahora!</a
                   >
-
-                  <!-- <a href="https://m.me/111745515342233?ref=Quiero un paquete"
-                    >j</a -->
                 </div>
               </div>
               <div class="product-item-price">$210.00</div>
@@ -152,7 +160,7 @@
               <div class="product-item-image">
                 <img
                   src="./assets/img/paquete3.png"
-                  alt="Stadium Full Exterior"
+                  alt="Paquete3"
                   class="img-1"
                 />
                 <div class="product-item-image-hover"></div>
@@ -178,7 +186,7 @@
               <div class="product-item-image">
                 <img
                   src="./assets/img/paquete4.png"
-                  alt="Stadium Full Exterior"
+                  alt="Paquete4"
                   class="img-1"
                 />
                 <div class="product-item-image-hover"></div>
@@ -191,8 +199,9 @@
                 <div class="product-item-title">Paquete 4</div>
                 <div class="button-pill">
                   <a
-                    href="https://m.me/111745515342233?ref=Quiero un paquete"
+                    href="https://m.me/111745515342233"
                     target="_blank"
+                    rel="noopener noreferrer"
                     >¡Pídela ahora!</a
                   >
                 </div>
@@ -201,8 +210,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- Especialidades -->
+      </section>
+      <!-- ------------- Especialidades --------------- -->
       <section class="section-especialidades" id="especialidades">
         <h3 class="title-section">Especialidades 2x1</h3>
         <p class="title-description">
@@ -323,13 +332,13 @@
             <div class="especialidad">
               <div class="especialidad__nombre">CAMPIRANA</div>
               <div class="especialidad__ingredientes">
-                Champiñón, carne molida, chipotle, aguacate.
+                Champiñón, carne enchilada, chipotle, aguacate.
               </div>
             </div>
             <div class="especialidad">
               <div class="especialidad__nombre">SUPREMA</div>
               <div class="especialidad__ingredientes">
-                Chorizo, carne molida, chipotle, aguacate.
+                Chorizo, carne enchilada, chipotle, aguacate.
               </div>
             </div>
             <div class="especialidad">
@@ -341,6 +350,8 @@
           </div>
         </div>
       </section>
+
+      <!-- ------------- Adicionales --------------- -->
       <section class="adicionales" id="adicionales">
         <h3 class="title-section">Adicionales</h3>
         <p class="title-description">
@@ -359,41 +370,40 @@
         <div class="grid-adicionales">
           <div class="cards">
             <article class="information [ card ]">
-              <span class="tag">Espaguetti</span>
+              <span class="tag tag1">Espaguetti</span>
               <h2 class="title">MEXICANA</h2>
               <p class="info">Chorizo, tocino y jalapeño.</p>
             </article>
             <article class="information [ card ]">
-              <span class="tag">Espaguetti</span>
+              <span class="tag tag1">Espaguetti</span>
               <h2 class="title">CAMPESTRE</h2>
               <p class="info">Champiñón y tocino.</p>
             </article>
             <article class="information [ card ]">
-              <span class="tag">Espaguetti</span>
+              <span class="tag tag1">Espaguetti</span>
               <h2 class="title">BOLOÑESA</h2>
               <p class="info">Carne molida</p>
             </article>
             <article class="information [ card ]">
-              <span class="tag">Espaguetti</span>
+              <span class="tag tag1">Espaguetti</span>
               <h2 class="title">GRATINADO</h2>
               <p class="info">Queso</p>
             </article>
             <article class="information [ card ]">
-              <span class="tag">Papas</span>
+              <span class="tag tag2">Papas</span>
               <h2 class="title">PAPAS AL HORNO</h2>
               <p class="info">De cualquier especialidad</p>
             </article>
           </div>
         </div>
       </section>
+
+      <!-- ------------- Visítanos --------------- -->
       <section class="visitanos" id="visitanos">
-        <h3 class="title-section">Visitanos</h3>
+        <h3 class="title-section">Visitanos en</h3>
         <div class="visitanos-mapa">
           <iframe
             src="https://www.google.com/maps/embed?pb=!4v1691106129345!6m8!1m7!1sgGL-ZeEl712Rntv-dCZXJQ!2m2!1d18.4606000434244!2d-97.38265393226985!3f133.62042184802388!4f-11.102728996673164!5f0.7820865974627469"
-            width="100%"
-            height="450"
-            style="border: 0"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -401,34 +411,7 @@
         </div>
       </section>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-        spaceBetween: 30,
-        centeredSlides: true,
-        autoplay: {
-          delay: 2500,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-      let icon = document.getElementById("icon-toggler");
-      let navbar = document.querySelector(".navbar-nav");
-      icon.addEventListener("click", () => {
-        navbar.classList.toggle("active");
-      });
-      ScrollReveal().reveal("#inicio", { delay: 400 });
-      ScrollReveal().reveal("#promociones", { delay: 400 });
-      ScrollReveal().reveal("#especialidades", { delay: 300 });
-      ScrollReveal().reveal("#adicionales", { delay: 400 });
-      ScrollReveal().reveal("#visitanos", { delay: 400 });
-    </script>
+    <script src="./assets/js/swiper-bundle.min.js"></script>
+    <script src="./assets/js/index.js"></script>
   </body>
 </html>
