@@ -13,14 +13,3 @@
 </template>
 
 <script setup></script>
-
-<style scoped>
-.visitanos {
-  padding: 3rem 0 !important;
-}
-.visitanos-mapa iframe {
-  border: 0;
-  width: 100%;
-  height: 600px;
-}
-</style>
