@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost&family=Ysabeau+Infant:ital,wght@0,100;0,400;1,1&display=swap");
 :root {
   --color-white: #fdfdfd;
+  --color-white-second: #bdbbb7;
   --color-dark-main: #040302;
   --color-dark-secondary: #111111;
+  --color-dark-third: #1b1b1b;
   --color-secondary-main: linear-gradient(45deg, #0b850b, #0eb10e);
   --color-secondary-hover: linear-gradient(45deg, #0a790a, #0ca10c);
   --color-border-main: #0b850b;
