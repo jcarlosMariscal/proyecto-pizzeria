@@ -7,6 +7,7 @@
   --color-secondary-hover: linear-gradient(45deg, #0a790a, #0ca10c);
   --color-border-main: #0b850b;
   --color-boxshadow: #0eb10e;
+  --text-input: rgba(231, 245, 231, 0.2);
   /* --color-secondary-main: linear-gradient(45deg, #e41011, #fc5130);
   --color-secondary-hover: linear-gradient(45deg, #da1010, #f04e2d);
   --color-border-main: #da1010;
@@ -84,7 +85,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: auto;
   font-family: "Jost", sans-serif;
   font-family: "Ysabeau Infant", sans-serif;
   scroll-behavior: smooth;
@@ -178,7 +179,7 @@ body {
   height: 100%;
   color: #000;
   font-size: 16px;
-  margin: 7rem 5rem !important;
+  margin: 2rem 5rem !important;
   padding-top: 5rem !important;
 }
 /* -------------------Carrousel ---------------- */

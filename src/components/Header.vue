@@ -12,9 +12,9 @@
           ></span>
         </button>
         <div class="navbar__logo">
-          <a href="#inicio">
-            <img src="../assets/img/logo.png" alt="Logo" width="70" />
-          </a>
+          <router-link to="/"
+            ><img src="../assets/img/logo.png" alt="Logo" width="70"
+          /></router-link>
         </div>
         <ul class="navbar-nav" :class="{ active: isActive }">
           <li class="navbar-item">
