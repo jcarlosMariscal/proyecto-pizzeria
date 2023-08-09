@@ -100,7 +100,7 @@ body {
   padding: 0.5rem;
   position: fixed;
   top: 0;
-  z-index: 9998888;
+  z-index: 500;
 }
 .header .navbar {
   display: flex;

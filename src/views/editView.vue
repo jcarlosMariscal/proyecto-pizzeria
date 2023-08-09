@@ -3,9 +3,9 @@
     <!-- Signup Form -->
     <div class="form signup bg-content">
       <div class="form-content">
-        <div class="theme-text header-title">Editar {{ collection }}</div>
+        <div class="theme-text header-title">Editar {{ formName }}</div>
         <form action="#">
-          <div class="field input-field">
+          <div class="field input-field" v-if="collection === 'paquetes'">
             <label for="">Nombre:</label>
             <input
               type="text"
@@ -14,7 +14,7 @@
               v-model="form.nombre"
             />
           </div>
-          <div class="field input-field">
+          <div class="field input-field" v-if="collection === 'paquetes'">
             <label for="">Descripción:</label>
             <input
               type="text"
@@ -32,7 +32,7 @@
               v-model="form.precio"
             />
           </div>
-          <div class="field field-img">
+          <div class="field field-img" v-if="collection === 'paquetes'">
             <div class="img-content">
               <img :src="require(`../assets/img/${form.imagen}`)" alt="" />
             </div>
@@ -61,27 +61,47 @@ import { ref } from "vue";
 import { db } from "../utils/firebaseConfig";
 import { useRouter, useRoute } from "vue-router";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { alertaForm } from "@/utils/funciones";
 
 const route = useRoute();
 const router = useRouter();
 const collection = ref(route.params.collection);
 const document = ref(route.params.document);
 let form = ref({});
+let formName = ref("");
 
 if (collection.value === "promotion") {
   collection.value = "paquetes";
+} else if (collection.value === "size") {
+  collection.value = "precios";
+} else if (collection.value === "aditional") {
+  collection.value = "adicionales";
 }
 const docRef = doc(db, collection.value, document.value);
 
 const documentSnapshot = await getDoc(docRef);
 if (documentSnapshot.exists()) {
   const data = documentSnapshot.data();
-  form = {
-    nombre: data.nombre,
-    descripcion: data.descripcion,
-    precio: data.precio,
-    imagen: data.imagen,
-  };
+  if (collection.value === "paquetes") {
+    formName.value = data.nombre;
+    form = {
+      nombre: data.nombre,
+      descripcion: data.descripcion,
+      precio: data.precio,
+      imagen: data.imagen,
+    };
+  } else if (
+    collection.value === "precios" ||
+    collection.value === "adicionales"
+  ) {
+    formName.value =
+      collection.value === "adicionales"
+        ? "tamaño " + data.tamanio
+        : "pizza " + data.tamanio;
+    form = {
+      precio: data.precio,
+    };
+  }
   console.log("Datos del documento:", data);
 } else {
   console.log("El documento no existe");
@@ -89,8 +109,10 @@ if (documentSnapshot.exists()) {
 const changeImage = () => {};
 // console.log(form.value);
 const update = async () => {
-  // console.log(form);
   await updateDoc(docRef, form);
+  // console.log("bien");
+  router.push("/dashboard"); // redirect to the feed
+  alertaForm("Actualización correcta", "success", 3000);
 };
 </script>
 

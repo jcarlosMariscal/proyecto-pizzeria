@@ -4,68 +4,70 @@
       <!-- <div class="app-header-logo"></div> -->
       <div class="app-header-navigation">
         <div class="tabs">
-          <a href="#" class="active"> Principal </a>
+          <router-link to="/dashboard" class="active"> Principal </router-link>
         </div>
       </div>
       <div class="app-header-actions">
         <button class="user-profile">
-          <span>Ramiz Pizza</span>
-          <!-- <span> -->
-          <!-- <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" /> -->
-          <!-- </span> -->
           <a class="dropdown-item" @click.prevent="cerrar">Cerrar sesión</a>
-        </button>
-      </div>
-      <div class="app-header-mobile">
-        <button class="icon-button large">
-          <i class="ph-list"></i>
         </button>
       </div>
     </div>
     <div class="app-body">
       <div class="app-body-main-content">
         <section class="service-section">
+          <h2>Banner</h2>
+          <div class="tiles">
+            <article class="tile" v-for="ban in banners" :key="ban.id">
+              <div class="tile-header">
+                <!-- <i class="ph-lightning-light"></i> -->
+                <h3>
+                  <span>Banner {{ ban.id }}</span>
+                  <span>{{ ban.titulo }}</span>
+                </h3>
+                <!--<img
+                  :src="require(`../assets/img/${paq.imagen}`)"
+                  width="100"
+                  alt=""
+                /> -->
+              </div>
+              <router-link class="edit-btn" to="/dashboard">Editar</router-link>
+            </article>
+          </div>
+          <div class="service-section-footer">
+            <p>Personalice el banner de su sitio.</p>
+          </div>
+        </section>
+        <section class="service-section">
           <h2>Promociones</h2>
           <div class="tiles">
             <article class="tile" v-for="paq in paquetes" :key="paq.id">
               <div class="tile-header">
-                <i class="ph-lightning-light"></i>
+                <!-- <i class="ph-lightning-light"></i> -->
                 <h3>
                   <span>{{ paq.nombre }}</span>
                   <span>$ {{ paq.precio }}</span>
-                  <img :src="require(`../assets/img/${paq.imagen}`)" alt="" />
                 </h3>
+                <img
+                  :src="require(`../assets/img/${paq.imagen}`)"
+                  width="100"
+                  alt=""
+                />
               </div>
-              <router-link :to="'/edit/promotion/' + paq.document"
+              <router-link
+                class="edit-btn"
+                :to="'/edit/promotion/' + paq.document"
                 >Editar</router-link
               >
-              <!-- <a href="#">
-                <span>Editar</span>
-                <span class="icon-button">
-                  <i class="ph-caret-right-bold"></i>
-                </span>
-              </a> -->
             </article>
           </div>
           <div class="service-section-footer">
-            <p>
-              Services are paid according to the current state of the currency
-              and tariff.
-            </p>
+            <p>Edite la información de sus promociones o agregue nuevas.</p>
           </div>
         </section>
-        <section class="specialtie-section">
+        <!-- <section class="specialtie-section">
           <div class="specialtie-section-header">
             <h2>Especialidades</h2>
-            <!-- <div class="filter-options">
-              <p>Filter selected: more than 100 $</p>
-              <button class="icon-button">
-                <i class="ph-funnel"></i>
-              </button>
-              <button class="icon-button">
-                <i class="ph-plus"></i>
-              </button>
-            </div> -->
           </div>
           <div class="specialties">
             <div class="specialtie">
@@ -129,62 +131,51 @@
               <div class="specialtie-number">- $ 70</div>
             </div>
           </div>
-        </section>
+        </section> -->
       </div>
       <div class="app-body-sidebar">
         <section class="size-section">
-          <h2>Tamaños</h2>
+          <h2>Pizzas</h2>
           <div class="size-section-header">
             <p>Edite el precio de sus pizzas</p>
           </div>
           <div class="sizes">
-            <div class="size">
+            <div class="size" v-for="pre in precios" :key="pre.id">
               <div class="size-details">
-                <h3>Internet</h3>
+                <h3>{{ pre.tamanio }}</h3>
                 <div>
-                  <span>$ 2,110</span>
-                  <button class="icon-button">
-                    <i class="ph-caret-right-bold"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="size">
-              <div class="size-details">
-                <h3>Universal</h3>
-                <div>
-                  <span>$ 5,621</span>
-                  <button class="icon-button">
-                    <i class="ph-caret-right-bold"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="size">
-              <div class="size-details">
-                <h3>Gold</h3>
-                <div>
-                  <span>$ 3,473</span>
-                  <button class="icon-button">
-                    <i class="ph-caret-right-bold"></i>
-                  </button>
+                  <span>$ {{ pre.precio }}</span>
+                  <router-link
+                    class="icon-button edit-btn"
+                    :to="'/edit/size/' + pre.document"
+                  >
+                    Editar
+                  </router-link>
                 </div>
               </div>
             </div>
           </div>
-          <div class="faq">
-            <p>Most frequently asked questions</p>
-            <div>
-              <label>Question</label>
-              <input type="text" placeholder="Type here" />
-            </div>
+        </section>
+        <section class="size-section">
+          <h2>Papas y Espaguettis</h2>
+          <div class="size-section-header">
+            <p>Edite el precio de sus papas y espaguettis</p>
           </div>
-          <div class="size-section-footer">
-            <button class="save-button">Save</button>
-            <button class="settings-button">
-              <i class="ph-gear"></i>
-              <span>More settings</span>
-            </button>
+          <div class="sizes">
+            <div class="size" v-for="adi in adicionales" :key="adi.id">
+              <div class="size-details">
+                <h3>{{ adi.tamanio }}</h3>
+                <div>
+                  <span>$ {{ adi.precio }}</span>
+                  <router-link
+                    class="icon-button edit-btn"
+                    :to="'/edit/aditional/' + adi.document"
+                  >
+                    Editar
+                  </router-link>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -201,6 +192,9 @@ import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { ref } from "vue";
 const router = useRouter();
 const paquetes = ref([]);
+const banners = ref([]);
+const precios = ref([]);
+const adicionales = ref([]);
 
 const cerrar = async () => {
   try {
@@ -230,15 +224,44 @@ const cerrar = async () => {
 };
 
 const queryPaquetes = collection(db, "paquetes");
+const queryBanners = collection(db, "banner");
+const queryPrecios = collection(db, "precios");
+const queryAdicionales = collection(db, "adicionales");
 onSnapshot(queryPaquetes, (snapshot) => {
-  console.log(snapshot.docs);
   paquetes.value = snapshot.docs
     .map((doc) => {
       const data = doc.data();
-      return { document: doc.id, ...data }; // Agregar el ID al objeto de datos
+      return { document: doc.id, ...data };
     })
     .sort((a, b) => a.id - b.id);
   console.log(paquetes.value);
+});
+onSnapshot(queryBanners, (snapshot) => {
+  banners.value = snapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      return { document: doc.id, ...data };
+    })
+    .sort((a, b) => a.id - b.id);
+  console.log(banners.value);
+});
+onSnapshot(queryPrecios, (snapshot) => {
+  precios.value = snapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      return { document: doc.id, ...data };
+    })
+    .sort((a, b) => a.id - b.id);
+  console.log(precios.value);
+});
+onSnapshot(queryAdicionales, (snapshot) => {
+  adicionales.value = snapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      return { document: doc.id, ...data };
+    })
+    .sort((a, b) => a.id - b.id);
+  console.log(adicionales.value);
 });
 </script>
 
@@ -250,8 +273,8 @@ onSnapshot(queryPaquetes, (snapshot) => {
   margin-right: auto;
 } */
 .app {
-  /* min-height: 80vh; */
-  width: 95%;
+  min-height: 80vh;
+  /* width: 100%; */
   max-width: 1600px;
   background: var(--color-dark-secondary);
   padding: 1.8rem;
@@ -312,12 +335,24 @@ onSnapshot(queryPaquetes, (snapshot) => {
   column-gap: 4rem;
   padding-top: 2.5rem;
 }
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
   .app-body {
     grid-template-columns: 1fr;
   }
   .app-body > * {
     margin-bottom: 3.5rem;
+  }
+  .sizes {
+    /* background: purple; */
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .size {
+    width: 45%;
   }
 }
 @media (max-width: 1200px) {
@@ -350,7 +385,7 @@ onSnapshot(queryPaquetes, (snapshot) => {
   border: 0;
   background: transparent;
   cursor: pointer;
-  color: var(--color-white-second);
+  color: var(--color-white);
   transition: 0.25s ease;
 }
 .user-profile:focus {
@@ -393,9 +428,9 @@ onSnapshot(queryPaquetes, (snapshot) => {
   height: 32px;
   border-radius: 50%;
   border: 0;
-  background-color: transparent;
-  border: 1px solid var(--c-gray-500);
-  color: var(--c-text-primary);
+  background-color: aqua;
+  border: 1px solid var(--color-dark);
+  color: var(--color-dark);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -426,6 +461,9 @@ onSnapshot(queryPaquetes, (snapshot) => {
 @media (max-width: 700px) {
   .tiles {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .size {
+    width: 100%;
   }
 }
 .tile {
@@ -476,7 +514,12 @@ onSnapshot(queryPaquetes, (snapshot) => {
 }
 .tile-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  width: 150px !important;
+}
+.tile-header img {
+  width: 100%;
 }
 .tile-header i {
   font-size: 2.5em;
@@ -534,15 +577,17 @@ onSnapshot(queryPaquetes, (snapshot) => {
   display: flex;
   width: 100%;
   flex-direction: column;
-  margin-left: 1.5rem;
+  margin-left: 1.2rem;
 }
 .size-details h3 {
   font-size: 1rem;
   color: var(--color-white-second);
+  font-weight: 700;
+  /* background: purple; */
 }
 .size-details div {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
+  /* margin-top: 0.75rem; */
+  /* padding-top: 0.75rem; */
   padding-bottom: 0.75rem;
   border-top: 1px solid var(--c-gray-600);
   border-bottom: 1px solid var(--text-input);
@@ -552,7 +597,8 @@ onSnapshot(queryPaquetes, (snapshot) => {
   flex: 1;
 }
 .size-details div span {
-  font-size: 1.5rem;
+  /* background-color: pink; */
+  font-size: 1.3rem;
   color: var(--color-white-second);
 }
 .specialties {
@@ -734,5 +780,17 @@ textarea:focus,
 button:focus {
   outline: 0;
   box-shadow: 0 0 0 2px var(--c-gray-800), 0 0 0 4px var(--c-gray-300);
+}
+.edit-btn {
+  color: var(--color-white);
+  background: var(--color-secondary-main);
+  padding: 0.2rem 0.3rem;
+  width: auto;
+  border-radius: 0.5rem;
+  display: flex !important;
+  justify-content: center !important;
+}
+.edit-btn:hover {
+  background: var(--color-secondary-hover);
 }
 </style>
