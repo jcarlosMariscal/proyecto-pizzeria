@@ -5,7 +5,9 @@
   </nav> -->
   <Header />
   <div class="container" id="inicio">
-    <router-view />
+    <Suspense>
+      <router-view />
+    </Suspense>
   </div>
 </template>
 <script setup>

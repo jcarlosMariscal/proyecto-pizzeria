@@ -27,65 +27,24 @@
         <section class="service-section">
           <h2>Promociones</h2>
           <div class="tiles">
-            <article class="tile">
+            <article class="tile" v-for="paq in paquetes" :key="paq.id">
               <div class="tile-header">
                 <i class="ph-lightning-light"></i>
                 <h3>
-                  <span>Paquete 1</span>
-                  <span>%555</span>
+                  <span>{{ paq.nombre }}</span>
+                  <span>$ {{ paq.precio }}</span>
+                  <img :src="require(`../assets/img/${paq.imagen}`)" alt="" />
                 </h3>
               </div>
-              <a href="#">
+              <router-link :to="'/edit/promotion/' + paq.document"
+                >Editar</router-link
+              >
+              <!-- <a href="#">
                 <span>Editar</span>
                 <span class="icon-button">
                   <i class="ph-caret-right-bold"></i>
                 </span>
-              </a>
-            </article>
-            <article class="tile">
-              <div class="tile-header">
-                <i class="ph-lightning-light"></i>
-                <h3>
-                  <span>Paquete 1</span>
-                  <span>%555</span>
-                </h3>
-              </div>
-              <a href="#">
-                <span>Editar</span>
-                <span class="icon-button">
-                  <i class="ph-caret-right-bold"></i>
-                </span>
-              </a>
-            </article>
-            <article class="tile">
-              <div class="tile-header">
-                <i class="ph-fire-simple-light"></i>
-                <h3>
-                  <span>Heating Gas</span>
-                  <span>Gazprom UA</span>
-                </h3>
-              </div>
-              <a href="#">
-                <span>Go to service</span>
-                <span class="icon-button">
-                  <i class="ph-caret-right-bold"></i>
-                </span>
-              </a>
-            </article>
-            <article class="tile">
-              <div class="tile-header">
-                <i class="ph-file-light"></i>
-                <h3>
-                  <span>Tax online</span>
-                  <span>Kharkov 62 str.</span>
-                </h3>
-              </div>
-              <a href="#">
-                <span>Go to service</span>
-                <span class="icon-button">
-                  <i class="ph-caret-right-bold"></i>
-                </span>
-              </a>
+              </a> -->
             </article>
           </div>
           <div class="service-section-footer">
@@ -234,11 +193,15 @@
 </template>
 
 <script setup>
-import { auth } from "../utils/firebaseConfig";
+import { auth, db } from "../utils/firebaseConfig";
 import { useRouter } from "vue-router";
 import { alertaForm } from "../utils/funciones";
 import { GoogleAuthProvider } from "firebase/auth";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { ref } from "vue";
 const router = useRouter();
+const paquetes = ref([]);
+
 const cerrar = async () => {
   try {
     await auth.signOut();
@@ -265,6 +228,18 @@ const cerrar = async () => {
     );
   }
 };
+
+const queryPaquetes = collection(db, "paquetes");
+onSnapshot(queryPaquetes, (snapshot) => {
+  console.log(snapshot.docs);
+  paquetes.value = snapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      return { document: doc.id, ...data }; // Agregar el ID al objeto de datos
+    })
+    .sort((a, b) => a.id - b.id);
+  console.log(paquetes.value);
+});
 </script>
 
 <style scoped>

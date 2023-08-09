@@ -3,6 +3,7 @@ import { auth } from "../utils/firebaseConfig";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import DashboardView from "../views/DashboardView.vue";
+import editView from "../views/editView.vue";
 
 const routes = [
   {
@@ -19,6 +20,12 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: DashboardView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/edit/:collection/:document",
+    name: "edit",
+    component: editView,
     meta: { requiresAuth: true },
   },
   // {
