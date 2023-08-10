@@ -5,13 +5,9 @@
       Pruebe nuestros ricos Espaquettis y Papas al Horno.
     </p>
     <div class="tamanios">
-      <div class="tamanio">
-        <p class="tamanio-name">CHICA</p>
-        <p class="tamanio-precio">$40</p>
-      </div>
-      <div class="tamanio">
-        <p class="tamanio-name">MEDIANA</p>
-        <p class="tamanio-precio">$55</p>
+      <div class="tamanio" v-for="adi in adicionales" :key="adi.id">
+        <p class="tamanio-name">{{ adi.tamanio.toUpperCase() }}</p>
+        <p class="tamanio-precio">${{ parseFloat(adi.precio).toFixed(2) }}</p>
       </div>
     </div>
     <div class="grid-adicionales">
@@ -46,4 +42,19 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import { auth, db } from "../utils/firebaseConfig";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { ref } from "vue";
+const adicionales = ref([]);
+const queryAdicionales = collection(db, "adicionales");
+onSnapshot(queryAdicionales, (snapshot) => {
+  adicionales.value = snapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      return { document: doc.id, ...data };
+    })
+    .sort((a, b) => a.id - b.id);
+  // console.log(paquetes.value);
+});
+</script>

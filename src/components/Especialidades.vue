@@ -5,21 +5,9 @@
       Pide más queso y le agregamos más sin costo.
     </p>
     <div class="tamanios">
-      <div class="tamanio">
-        <p class="tamanio-name">CHICA</p>
-        <p class="tamanio-precio">$120</p>
-      </div>
-      <div class="tamanio">
-        <p class="tamanio-name">MEDIANA</p>
-        <p class="tamanio-precio">$175</p>
-      </div>
-      <div class="tamanio">
-        <p class="tamanio-name">GRANDE</p>
-        <p class="tamanio-precio">$225</p>
-      </div>
-      <div class="tamanio">
-        <p class="tamanio-name">FAMILIAR</p>
-        <p class="tamanio-precio">$260</p>
+      <div class="tamanio" v-for="pre in precios" :key="pre.id">
+        <p class="tamanio-name">{{ pre.tamanio.toUpperCase() }}</p>
+        <p class="tamanio-precio">${{ parseFloat(pre.precio).toFixed(2) }}</p>
       </div>
     </div>
     <div class="grid-especialidades">
@@ -137,4 +125,19 @@
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+import { auth, db } from "../utils/firebaseConfig";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { ref } from "vue";
+const precios = ref([]);
+const queryPrecios = collection(db, "precios");
+onSnapshot(queryPrecios, (snapshot) => {
+  precios.value = snapshot.docs
+    .map((doc) => {
+      const data = doc.data();
+      return { document: doc.id, ...data };
+    })
+    .sort((a, b) => a.id - b.id);
+  // console.log(paquetes.value);
+});
+</script>
