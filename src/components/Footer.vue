@@ -6,6 +6,7 @@
         Vísitanos a nuestra sucursal o llama al 238-383-1826 / 238-389-6565 y
         haz tu pedido.
       </p>
+      <p>Horario de atención de 11:00 a.m. a 11:00 p.m.</p>
       <p class="copyright-text">
         Copyright &copy; 2023 Todos los derechos reservados por
         <router-link to="/">Rami'z Pizza</router-link>.
@@ -51,7 +52,7 @@
   color: #737373;
 }
 .site-footer a:hover {
-  color: #3366cc;
+  color: var(--color-boxshadow);
   text-decoration: none;
 }
 .site-footer .social-icons a {
