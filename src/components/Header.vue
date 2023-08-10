@@ -16,6 +16,9 @@
             ><img src="../assets/img/logo.png" alt="Logo" width="70"
           /></router-link>
         </div>
+        <router-link to="login" style="width: 10px; color: white"
+          >a</router-link
+        >
         <ul class="navbar-nav" :class="{ active: isActive }">
           <li class="navbar-item">
             <a href="#promociones" class="nav-link" @click="closeNavbar"

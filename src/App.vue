@@ -24,7 +24,4 @@ ScrollReveal().reveal("#visitanos", { delay: 400 });
 </script>
 <style>
 @import url("./assets/css/style.css");
-.container {
-  /* background: aqua; */
-}
 </style>
