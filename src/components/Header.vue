@@ -16,9 +16,11 @@
             ><img src="../assets/img/logo.png" alt="Logo" width="70"
           /></router-link>
         </div>
-        <router-link to="login" style="width: 10px; color: white"
-          >a</router-link
-        >
+        <div class="option-admin">
+          <router-link to="login" class="option-admin-content"
+            ><i class="fa-solid fa-gears"></i
+          ></router-link>
+        </div>
         <ul class="navbar-nav" :class="{ active: isActive }">
           <li class="navbar-item">
             <a href="#promociones" class="nav-link" @click="closeNavbar"
@@ -66,20 +68,22 @@ const closeNavbar = (e) => {
     isActive.value = false;
   }
 };
-// const d = document;
-// const icon = d.getElementById("icon-toggler");
-// const navbar = d.querySelector(".navbar-nav");
-// const icon_menu = d.getElementById("icon-menu");
-// icon.addEventListener("click", () => {
-//   navbar.classList.toggle("active");
-//   icon_menu.classList.toggle("fa-bars");
-//   icon_menu.classList.toggle("fa-xmark");
-// });
-// navbar.addEventListener("click", (e) => {
-//   if (!e.target.matches("button")) {
-//     navbar.classList.remove("active");
-//     icon_menu.classList.remove("fa-xmark");
-//     icon_menu.classList.add("fa-bars");
-//   }
-// });
 </script>
+<style scoped>
+.option-admin-content {
+  height: 40px;
+  width: 40px;
+  background-color: var(--color-dark-secondary);
+  border-radius: 50%;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in;
+}
+.option-admin-content:hover {
+  background-color: var(--color-dark-third);
+  color: var(--color-border-main);
+  transition: all 0.5s ease-in;
+}
+</style>

@@ -5,15 +5,15 @@
   --color-dark-main: #040302;
   --color-dark-secondary: #111111;
   --color-dark-third: #1b1b1b;
-  --color-secondary-main: linear-gradient(45deg, #0b850b, #0eb10e);
-  --color-secondary-hover: linear-gradient(45deg, #0a790a, #0ca10c);
-  --color-border-main: #0b850b;
-  --color-boxshadow: #0eb10e;
+  /* --color-secondary-main: linear-gradient(45deg, #0b850b, #0eb10e);
+  --color-secondary-hover: linear-gradient(45deg, #0a790a, #0ca10c); */
+  /* --color-border-main: #0b850b; */
+  /* --color-boxshadow: #0eb10e; */
   --text-input: rgba(231, 245, 231, 0.2);
-  /* --color-secondary-main: linear-gradient(45deg, #e41011, #fc5130);
+  --color-secondary-main: linear-gradient(45deg, #e41011, #fc5130);
   --color-secondary-hover: linear-gradient(45deg, #da1010, #f04e2d);
   --color-border-main: #da1010;
-  --color-boxshadow: rgb(240, 78, 45); */
+  --color-boxshadow: rgb(240, 78, 45);
 }
 /* -------------- Reset CSS ----------------- */
 html,
@@ -109,6 +109,7 @@ body {
 }
 .header .navbar .navbar-main {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 .navbar .navbar-main .navbar__toggler {
