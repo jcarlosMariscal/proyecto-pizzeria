@@ -2,7 +2,7 @@
   <section class="forms">
     <!-- Signup Form -->
     <div class="form signup bg-content">
-      <div class="form-content">
+      <div class="form-content" v-if="!recoverPass">
         <div class="theme-text header-title">Iniciar sesión</div>
         <form action="#">
           <div class="field input-field">
@@ -20,16 +20,45 @@
               class="password"
               v-model="password"
             />
-            <i class="bx bx-hide eye-icon" @click="eyeIcon"></i>
+            <i class="fa-regular fa-eye-slash eye-icon" @click="eyeIcon"></i>
           </div>
           <div class="err-form" v-if="errForm" role="alert">
             {{ errMsg }}
           </div>
           <div class="form-link">
-            <a href="#" class="forgot-pass">¿Olvídaste tu contraseña?</a>
+            <a href="#" class="forgot-pass" @click.prevent="resetPass"
+              >¿Olvídaste tu contraseña?</a
+            >
           </div>
           <div class="field button-field">
-            <button @click="loginUser">Iniciar sesión</button>
+            <button type="submit" @click="loginUser">Iniciar sesión</button>
+          </div>
+        </form>
+      </div>
+      <div class="form-content" v-else>
+        <div class="theme-text header-title">Recuperar contraseña</div>
+        <p class="recovery-description">
+          Escriba el correo con la cuál accede al panel, le envíaremos un enlace
+          de recuperación.
+        </p>
+        <form action="#">
+          <div class="field input-field">
+            <input
+              type="email"
+              placeholder="ejemplo@gmail.com"
+              class="input"
+              v-model="resetEmail"
+            />
+          </div>
+          <div class="form-link">
+            <a href="#" class="forgot-pass" @click.prevent="backLogin"
+              >Regresar a Inicio de Sesión.</a
+            >
+          </div>
+          <div class="field button-field">
+            <button type="submit" @click.prevent="resetContinue">
+              Continuar
+            </button>
           </div>
         </form>
       </div>
@@ -41,8 +70,7 @@
 import { auth } from "../utils/firebaseConfig";
 import {
   signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -53,6 +81,8 @@ const password = ref("");
 const errForm = ref(false);
 const errMsg = ref("");
 const router = useRouter(); // get a reference to our vue router
+const recoverPass = ref(false);
+const resetEmail = ref("");
 
 onMounted(() => {});
 
@@ -61,11 +91,11 @@ const eyeIcon = (e) => {
   const passwordInput = e.target.previousElementSibling;
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
-    e.target.classList.replace("bx-hide", "bx-show");
+    e.target.classList.replace("fa-eye-slash", "fa-eye");
     return;
   }
   passwordInput.type = "password";
-  e.target.classList.replace("bx-show", "bx-hide");
+  e.target.classList.replace("fa-eye", "fa-eye-slash");
 };
 
 const loginUser = (e) => {
@@ -96,6 +126,28 @@ const loginUser = (e) => {
       errForm.value = true;
     });
 };
+
+const resetPass = (e) => {
+  recoverPass.value = true;
+};
+const backLogin = (e) => {
+  recoverPass.value = false;
+};
+const resetContinue = (e) => {
+  console.log(resetEmail.value);
+  sendPasswordResetEmail(auth, resetEmail.value)
+    .then(() => {
+      alertaForm(
+        "Enlace envíado correctamente. Revise su correo y vuelva a iniciar sesión con la nueva contraseña.",
+        "success",
+        5000
+      );
+      recoverPass.value = false;
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
 </script>
 
 <style scoped>
@@ -104,6 +156,7 @@ const loginUser = (e) => {
   align-items: center;
   justify-content: center;
   column-gap: 30px;
+  padding: 3rem 0;
 }
 .form {
   background: var(--color-dark-secondary);
@@ -152,6 +205,12 @@ const loginUser = (e) => {
 
 .field input:focus {
   border-bottom-width: 2px;
+}
+.recovery-description {
+  color: var(--color-white);
+}
+.input-field {
+  position: relative;
 }
 .eye-icon {
   position: absolute;

@@ -9,7 +9,9 @@
       </div>
       <div class="app-header-actions">
         <button class="user-profile">
-          <a class="dropdown-item" @click.prevent="cerrar">Cerrar sesión</a>
+          <a class="dropdown-item" @click.prevent="cerrar"
+            ><i class="fa-solid fa-arrow-right-from-bracket"></i
+          ></a>
         </button>
       </div>
     </div>
@@ -301,7 +303,7 @@ onSnapshot(queryAdicionales, (snapshot) => {
 }
 @media (max-width: 1200px) {
   .app-header-navigation {
-    display: none;
+    /* display: none; */
   }
 }
 .app-header-actions {
@@ -313,7 +315,7 @@ onSnapshot(queryAdicionales, (snapshot) => {
 }
 @media (max-width: 1200px) {
   .app-header-actions {
-    display: none;
+    /* display: none; */
   }
 }
 .app-header-mobile {
@@ -388,41 +390,21 @@ onSnapshot(queryAdicionales, (snapshot) => {
   color: var(--color-white);
   transition: 0.25s ease;
 }
-.user-profile:focus {
-  color: var(--c-text-primary);
-}
-.user-profile:hover span:last-child,
-.user-profile:focus span:last-child {
-  box-shadow: 0 0 0 4px var(--c-gray-800), 0 0 0 5px var(--c-text-tertiary);
-}
-.user-profile span:first-child {
-  display: flex;
-  font-size: 1.125rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--text-input);
-  font-weight: 300;
-}
-.user-profile a {
-  display: flex;
-  font-size: 1.125rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--text-input);
-  font-weight: 300;
-}
-.user-profile span:last-child {
-  transition: 0.25s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 42px;
-  height: 42px;
+.user-profile .dropdown-item {
+  background-color: var(--color-dark-third);
+  opacity: 0.8;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
-  overflow: hidden;
-  margin-left: 1.5rem;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
 }
+.user-profile .dropdown-item i {
+  transform: rotate(180deg) !important;
+}
+
 .icon-button {
   width: 32px;
   height: 32px;
@@ -458,14 +440,7 @@ onSnapshot(queryAdicionales, (snapshot) => {
   row-gap: 1rem;
   margin-top: 1.25rem;
 }
-@media (max-width: 700px) {
-  .tiles {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .size {
-    width: 100%;
-  }
-}
+
 .tile {
   padding: 1rem;
   border-radius: 8px;
@@ -684,6 +659,9 @@ onSnapshot(queryAdicionales, (snapshot) => {
     width: 100%;
     justify-content: flex-start;
   }
+  .tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .size-section > h2 {
   font-size: 1.5rem;
@@ -792,5 +770,13 @@ button:focus {
 }
 .edit-btn:hover {
   background: var(--color-secondary-hover);
+}
+@media (max-width: 700px) {
+  .tiles {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .size {
+    width: 100%;
+  }
 }
 </style>
