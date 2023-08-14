@@ -32,7 +32,7 @@
               v-model="form.precio"
             />
           </div>
-          <div class="field field-img" v-if="collection === 'paquetes'">
+          <!-- <div class="field field-img" v-if="collection === 'paquetes'">
             <div class="img-content">
               <img :src="require(`../assets/img/${form.imagen}`)" alt="" />
             </div>
@@ -43,9 +43,6 @@
                 @change="changeImage"
               />
             </div>
-          </div>
-          <!-- <div class="err-form" v-if="errForm" role="alert">
-            {{ errMsg }}
           </div> -->
           <div class="field button-field">
             <button @click.prevent="update">Guardar</button>
@@ -260,6 +257,15 @@ const update = async () => {
   text-decoration: underline;
 }
 
+@media screen and (max-width: 1000px) {
+  .input-field {
+    display: flex;
+    flex-direction: column;
+  }
+  .input-field label {
+    width: 100%;
+  }
+}
 @media screen and (max-width: 860px) {
   .form {
     width: 50%;

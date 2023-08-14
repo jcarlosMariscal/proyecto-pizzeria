@@ -4,8 +4,26 @@
     <div class="form signup bg-content">
       <div class="form-content" v-if="!recoverPass">
         <div class="theme-text header-title">Iniciar sesión</div>
+        <!-- <div class="method-login">
+          <button
+            type="button"
+            class="method"
+            :class="{ active: methodEmail }"
+            @click.prevent="changeMethod('email')"
+          >
+            <i class="fa-regular fa-envelope"></i> Correo
+          </button>
+          <button
+            type="button"
+            class="method"
+            :class="{ active: !methodEmail }"
+            @click.prevent="changeMethod('phone')"
+          >
+            <i class="fa-solid fa-mobile-screen-button"></i> Teléfono
+          </button>
+        </div> -->
         <form action="#">
-          <div class="field input-field">
+          <div class="field input-field" v-if="methodEmail">
             <input
               type="email"
               placeholder="ejemplo@gmail.com"
@@ -13,7 +31,15 @@
               v-model="email"
             />
           </div>
-          <div class="field input-field">
+          <div class="field input-field" v-if="!methodEmail">
+            <input
+              type="text"
+              placeholder="2342592122"
+              class="input"
+              v-model="phone"
+            />
+          </div>
+          <div class="field input-field" v-if="methodEmail">
             <input
               type="password"
               placeholder="Escriba su contraseña"
@@ -71,18 +97,21 @@ import { auth } from "../utils/firebaseConfig";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  signInWithPhoneNumber,
 } from "firebase/auth";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { alertaForm } from "../utils/funciones";
 
 const email = ref("");
+const phone = ref("");
 const password = ref("");
 const errForm = ref(false);
 const errMsg = ref("");
 const router = useRouter(); // get a reference to our vue router
 const recoverPass = ref(false);
 const resetEmail = ref("");
+const methodEmail = ref(true);
 
 onMounted(() => {});
 
@@ -98,15 +127,14 @@ const eyeIcon = (e) => {
   e.target.classList.replace("fa-eye", "fa-eye-slash");
 };
 
-const loginUser = (e) => {
-  e.preventDefault();
-  if (!email.value || !password.value) {
-    errForm.value = true;
-    errMsg.value =
-      "Por favor, ingresa un correo electrónico y una contraseña válidos";
-    return;
-  }
+const changeMethod = (method) => {
+  methodEmail.value = method === "email" ? true : false;
+  // methodEmail.value = !methodEmail.value;
+  // console.log(methodEmail.value);
+  // console.log("cabio");
+};
 
+const withEmail = () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((response) => {
       router.push("/dashboard"); // redirect to the feed
@@ -125,6 +153,33 @@ const loginUser = (e) => {
         "Verifique que su correo y contraseña sean correctos.";
       errForm.value = true;
     });
+};
+const loginUser = async (e) => {
+  e.preventDefault();
+
+  if (methodEmail.value) {
+    if (!email.value || !password.value) {
+      errForm.value = true;
+      errMsg.value =
+        "Por favor, ingresa un correo electrónico y una contraseña válidos";
+      return;
+    }
+    withEmail();
+  } else {
+    // Iniciar sesión con número de teléfono
+    const phoneNumberWithCountryCode = `+52${phone.value}`; // Agrega el código de país
+    // Envia un código de verificación al número de teléfono
+    console.log(phoneNumberWithCountryCode);
+    await signInWithPhoneNumber(auth, phoneNumberWithCountryCode)
+      .then((confirmationResult) => {
+        console.log(confirmationResult);
+        // Guarda la confirmación resultante en el estado o en algún lugar para su uso posterior
+      })
+      .catch((err) => {
+        // Manejo de errores
+        console.log(err);
+      });
+  }
 };
 
 const resetPass = (e) => {
@@ -285,5 +340,34 @@ const resetContinue = (e) => {
   .form {
     width: 95%;
   }
+}
+.method-login {
+  /* background-color: aqua; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.method-login .method {
+  /* background: pink; */
+  padding: 0.5rem;
+  border: 1px solid var(--color-dark-third);
+  color: var(--color-white);
+  opacity: 0.2;
+  cursor: pointer;
+}
+.method-login .method:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+.method-login .method:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.method-login .method.active {
+  background: var(--color-white);
+  color: var(--color-border-main);
+  opacity: 1;
+  cursor: auto;
 }
 </style>

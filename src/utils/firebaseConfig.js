@@ -19,5 +19,6 @@ const firebase = initializeApp(firebaseConfig);
 
 //initialize firebase auth
 const auth = getAuth(firebase);
+auth.languageCode = "it";
 const db = getFirestore(firebase);
 export { auth, db };
